@@ -43,7 +43,7 @@ void loop(void)
   //if (millis() - adsTimer > ADS1115_CONVERSIONDELAY) {
     results = ads.readConversion_Differential_0_1();
     ads.startConversion_Differential_0_1();
-    adsTimer = 0;
+    adsTimer = millis();
   }
     
   Serial.print("Differential: "); Serial.print(results); Serial.print("("); Serial.print(results * multiplier); Serial.println("mV)");
