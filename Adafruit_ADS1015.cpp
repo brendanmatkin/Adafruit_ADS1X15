@@ -264,6 +264,63 @@ int16_t Adafruit_ADS1015::readADC_Differential_0_1() {
 
 /**************************************************************************/
 /*!
+    @brief  Starts differential conversion between the P (AIN0) 
+            and N (AIN1) input. User should wait ADS1115_CONVERSIONDELAY 
+            milliseconds before reading the result.
+*/
+/**************************************************************************/
+void Adafruit_ADS1015::startConversion_Differential_0_1() {
+  // Start with default values
+  uint16_t config =
+      ADS1015_REG_CONFIG_CQUE_NONE |    // Disable the comparator (default val)
+      ADS1015_REG_CONFIG_CLAT_NONLAT |  // Non-latching (default val)
+      ADS1015_REG_CONFIG_CPOL_ACTVLOW | // Alert/Rdy active low   (default val)
+      ADS1015_REG_CONFIG_CMODE_TRAD |   // Traditional comparator (default val)
+      ADS1015_REG_CONFIG_DR_1600SPS |   // 1600 samples per second (default)
+      ADS1015_REG_CONFIG_MODE_SINGLE;   // Single-shot mode (default)
+
+  // Set PGA/voltage range
+  config |= m_gain;
+
+  // Set channels
+  config |= ADS1015_REG_CONFIG_MUX_DIFF_0_1; // AIN0 = P, AIN1 = N
+
+  // Set 'start single-conversion' bit
+  config |= ADS1015_REG_CONFIG_OS_SINGLE;
+
+  // Write config register to the ADC
+  writeRegister(m_i2cAddress, ADS1015_REG_POINTER_CONFIG, config);
+}
+
+/**************************************************************************/
+/*!
+    @brief  Reads the conversion results, measuring the voltage
+            difference between the P (AIN0) and N (AIN1) input.  Generates
+            a signed value since the difference can be either
+            positive or negative.
+
+    @return the ADC reading
+*/
+/**************************************************************************/
+int16_t Adafruit_ADS1015::readConversion_Differential_0_1() {
+  // Read the conversion results
+  uint16_t res =
+      readRegister(m_i2cAddress, ADS1015_REG_POINTER_CONVERT) >> m_bitShift;
+  if (m_bitShift == 0) {
+    return (int16_t)res;
+  } else {
+    // Shift 12-bit results right 4 bits for the ADS1015,
+    // making sure we keep the sign bit intact
+    if (res > 0x07FF) {
+      // negative number - extend the sign to 16th bit
+      res |= 0xF000;
+    }
+    return (int16_t)res;
+  }
+}
+
+/**************************************************************************/
+/*!
     @brief  Reads the conversion results, measuring the voltage
             difference between the P (AIN2) and N (AIN3) input.  Generates
             a signed value since the difference can be either

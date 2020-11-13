@@ -153,6 +153,8 @@ public:
   void begin(void);
   uint16_t readADC_SingleEnded(uint8_t channel);
   int16_t readADC_Differential_0_1(void);
+  void startConversion_Differential_0_1(void);
+  int16_t readConversion_Differential_0_1(void);
   int16_t readADC_Differential_2_3(void);
   void startComparator_SingleEnded(uint8_t channel, int16_t threshold);
   int16_t getLastConversionResults();
