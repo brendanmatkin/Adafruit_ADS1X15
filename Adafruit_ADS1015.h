@@ -135,6 +135,11 @@ typedef enum {
   GAIN_SIXTEEN = ADS1015_REG_CONFIG_PGA_0_256V
 } adsGain_t;
 
+typedef enum {
+  DIFF_0_1,
+  DIFF_2_3
+} diffChannel_t;
+
 /**************************************************************************/
 /*!
     @brief  Sensor driver for the Adafruit ADS1015 ADC breakout.
@@ -153,8 +158,8 @@ public:
   void begin(void);
   uint16_t readADC_SingleEnded(uint8_t channel);
   int16_t readADC_Differential_0_1(void);
-  void startConversion_Differential_0_1(void);
-  int16_t readConversion_Differential_0_1(void);
+  void startConversion_Differential(diffChannel_t channel);
+  int16_t readLastConversion(void); // this is just like getLastConversion but with no built-in delay
   int16_t readADC_Differential_2_3(void);
   void startComparator_SingleEnded(uint8_t channel, int16_t threshold);
   int16_t getLastConversionResults();

@@ -269,7 +269,7 @@ int16_t Adafruit_ADS1015::readADC_Differential_0_1() {
             milliseconds before reading the result.
 */
 /**************************************************************************/
-void Adafruit_ADS1015::startConversion_Differential_0_1() {
+void Adafruit_ADS1015::startConversion_Differential(diffChannel_t channel) {
   // Start with default values
   uint16_t config =
       ADS1015_REG_CONFIG_CQUE_NONE |    // Disable the comparator (default val)
@@ -283,7 +283,14 @@ void Adafruit_ADS1015::startConversion_Differential_0_1() {
   config |= m_gain;
 
   // Set channels
-  config |= ADS1015_REG_CONFIG_MUX_DIFF_0_1; // AIN0 = P, AIN1 = N
+  switch(channel) {
+    case DIFF_0_1:
+      config |= ADS1015_REG_CONFIG_MUX_DIFF_0_1; // AIN0 = P, AIN1 = N
+      break;
+    case DIFF_2_3:
+      config |= ADS1015_REG_CONFIG_MUX_DIFF_2_3; // AIN0 = P, AIN1 = N
+      break;
+  }
 
   // Set 'start single-conversion' bit
   config |= ADS1015_REG_CONFIG_OS_SINGLE;
@@ -297,12 +304,13 @@ void Adafruit_ADS1015::startConversion_Differential_0_1() {
     @brief  Reads the conversion results, measuring the voltage
             difference between the P (AIN0) and N (AIN1) input.  Generates
             a signed value since the difference can be either
-            positive or negative.
+            positive or negative. Same as getLastConversion but without
+            a delay call (user must handle the conversion time)
 
     @return the ADC reading
 */
 /**************************************************************************/
-int16_t Adafruit_ADS1015::readConversion_Differential_0_1() {
+int16_t Adafruit_ADS1015::readLastConversion() {
   // Read the conversion results
   uint16_t res =
       readRegister(m_i2cAddress, ADS1015_REG_POINTER_CONVERT) >> m_bitShift;
