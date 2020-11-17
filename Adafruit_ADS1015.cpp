@@ -175,7 +175,7 @@ uint16_t Adafruit_ADS1015::readADC_SingleEnded(uint8_t channel) {
       ADS1015_REG_CONFIG_CLAT_NONLAT |  // Non-latching (default val)
       ADS1015_REG_CONFIG_CPOL_ACTVLOW | // Alert/Rdy active low   (default val)
       ADS1015_REG_CONFIG_CMODE_TRAD |   // Traditional comparator (default val)
-      ADS1015_REG_CONFIG_DR_1600SPS |   // 1600 samples per second (default)
+      ADS1015_REG_CONFIG_DR_860SPS |   // 860 samples per second
       ADS1015_REG_CONFIG_MODE_SINGLE;   // Single-shot mode (default)
 
   // Set PGA/voltage range
@@ -228,7 +228,7 @@ int16_t Adafruit_ADS1015::readADC_Differential_0_1() {
       ADS1015_REG_CONFIG_CLAT_NONLAT |  // Non-latching (default val)
       ADS1015_REG_CONFIG_CPOL_ACTVLOW | // Alert/Rdy active low   (default val)
       ADS1015_REG_CONFIG_CMODE_TRAD |   // Traditional comparator (default val)
-      ADS1015_REG_CONFIG_DR_1600SPS |   // 1600 samples per second (default)
+      ADS1015_REG_CONFIG_DR_860SPS |   // 860 samples per second
       ADS1015_REG_CONFIG_MODE_SINGLE;   // Single-shot mode (default)
 
   // Set PGA/voltage range
@@ -276,7 +276,7 @@ void Adafruit_ADS1015::startConversion_Differential(diffChannel_t channel) {
       ADS1015_REG_CONFIG_CLAT_NONLAT |  // Non-latching (default val)
       ADS1015_REG_CONFIG_CPOL_ACTVLOW | // Alert/Rdy active low   (default val)
       ADS1015_REG_CONFIG_CMODE_TRAD |   // Traditional comparator (default val)
-      ADS1015_REG_CONFIG_DR_1600SPS |   // 1600 samples per second (default)
+      ADS1015_REG_CONFIG_DR_860SPS |   // 860 samples per second
       ADS1015_REG_CONFIG_MODE_SINGLE;   // Single-shot mode (default)
 
   // Set PGA/voltage range
@@ -344,7 +344,7 @@ int16_t Adafruit_ADS1015::readADC_Differential_2_3() {
       ADS1015_REG_CONFIG_CLAT_NONLAT |  // Non-latching (default val)
       ADS1015_REG_CONFIG_CPOL_ACTVLOW | // Alert/Rdy active low   (default val)
       ADS1015_REG_CONFIG_CMODE_TRAD |   // Traditional comparator (default val)
-      ADS1015_REG_CONFIG_DR_1600SPS |   // 1600 samples per second (default)
+      ADS1015_REG_CONFIG_DR_860SPS |   // 860 samples per second
       ADS1015_REG_CONFIG_MODE_SINGLE;   // Single-shot mode (default)
 
   // Set PGA/voltage range
@@ -399,7 +399,7 @@ void Adafruit_ADS1015::startComparator_SingleEnded(uint8_t channel,
       ADS1015_REG_CONFIG_CLAT_LATCH |   // Latching mode
       ADS1015_REG_CONFIG_CPOL_ACTVLOW | // Alert/Rdy active low   (default val)
       ADS1015_REG_CONFIG_CMODE_TRAD |   // Traditional comparator (default val)
-      ADS1015_REG_CONFIG_DR_1600SPS |   // 1600 samples per second (default)
+      ADS1015_REG_CONFIG_DR_860SPS |   // 860 samples per second
       ADS1015_REG_CONFIG_MODE_CONTIN |  // Continuous conversion mode
       ADS1015_REG_CONFIG_MODE_CONTIN;   // Continuous conversion mode
 

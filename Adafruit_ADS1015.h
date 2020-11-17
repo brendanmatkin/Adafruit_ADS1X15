@@ -96,6 +96,7 @@
   (0x0080) ///< 1600 samples per second (default)
 #define ADS1015_REG_CONFIG_DR_2400SPS (0x00A0) ///< 2400 samples per second
 #define ADS1015_REG_CONFIG_DR_3300SPS (0x00C0) ///< 3300 samples per second
+#define ADS1015_REG_CONFIG_DR_860SPS (0x00E0) ///< 860 samples per second on the ADS1115
 
 #define ADS1015_REG_CONFIG_CMODE_MASK (0x0010) ///< CMode Mask
 #define ADS1015_REG_CONFIG_CMODE_TRAD                                          \
